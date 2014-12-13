@@ -2,14 +2,21 @@
 title: "Contraception après IVG"
 author: "Noémie LERCH, JcB"
 date: "13/12/2014"
-output: html_document
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+  html_document:
+    toc: yes
+  word_document: default
 ---
 
 
 Récupérer les données source
 ============================
 
-```{r data, echo=FALSE}
+```{r data, echo=FALSE, message=FALSE}
 path <- "../"
 file <- paste0(path, "../Data/questionnaire patiente 12.12.14_saisie.csv")
 d <- read.csv(file, skip = 1)
@@ -19,7 +26,7 @@ library(epicalc)
 ```
 Le fichier __`r file`__ contient __`r nrow(d)`__ enregistrements.
 
-Analyse descriptive
+Analyse descriptive univariée
 ===================
 
 Origine des données
@@ -36,13 +43,18 @@ summary(d$AGE)
 
 hist(d$AGE, main = "Histogramme des ages", ylab = "Nombre de sujets", xlab = "Âges en années")
 
-boxplot(d$AGE, main = "Distribution des ages", ylab = "Âges en années")
 ```
+
+```{r age2, echo=FALSE}
+boxplot(d$AGE, main = "Distribution des ages", ylab = "Âges en années")
+
+```
+
 
 2. Niveau d’étude
 ---------------------
 
-```{r csp, echo=FALSE}
+```{r csp, echo=FALSE, warning=FALSE}
 summary(d$NIVEAU)
 
 tab1(d$NIVEAU, main = "Niveau d’étude", ylab = "Nombre")
@@ -113,7 +125,161 @@ tab1(d$IVG, main = "Méthode utilisée pour l'IVG", ylab = "Fréquence")
 8. Dans l’année précèdent votre grossesse, avez-vous changé de méthode de contraception ?
 ------------------------------------------------------------------------------------------
 
-```{r}
-tab1(d$CHANGE,ai)
+```{r, echo=FALSE}
+tab1(d$CHANGE, main = "Avez-vous changé de méthode de contraception ?", ylab = "Fréquence")
+```
+
+9. Quelle(s) est/sont la ou les dernière(s) méthode(s) contraceptive(s) que vous avez utilisée avant cette grossesse ?
+=======================================================================================================================
+
+```{r last_methode, echo=FALSE}
+#On regroupe 4 colonnes sous le label "last_met"
+last_met <- d[, c("AUCUNE", "P", "SC", "SH", "IMP", "PT", "AV", "PM", "PL", "SP", "RT", "AB", "CT", "AMC")]
+# transforme les NA en Oui ou Non
+a <- lapply(last_met, function(x){ifelse(is.na(x), "non", "oui")})
+a <- as.data.frame(a)
+```
+
+#### nombre de femmes utilisant chaque méthode contraceptive
+
+```{r, echo=FALSE}
+x <- apply(a, 2, table)
+b <- sapply(x, function(x){x[2]})
+t <- c("AUCUNE", "P", "SC", "SH", "IMP", "PT", "AV", "PM", "PL", "SP", "RT", "AB", "CT", "AMC")
+names(b) <- t
+b[!is.na(b)]
+
+```
+
+#### nombre de méthode contraceptive utilisée par une femme
+
+```{r, echo=FALSE}
+x <- apply(a, 1, table)
+b <- sapply(x, function(x){x[2]})
+t <- summary(as.factor(b))
+t <- rbind(t)
+rownames(t) <- "nb. de femmes"
+t
+
+```
+
+
+
+Depuis quand l’utilisez- vous ?
+-------------------------------
+
+```{r date_ut, echo=FALSE}
+summary(d$DATE_UT)
+```
+
+10. Cette méthode contraceptive vous convenait-t-elle ?
+-------------------------------------------------------
+
+```{r tolerance, echo=FALSE}
+s_tolerance <- summary(d$TOLERANCE)
+s_tolerance
+```
+
+Si elle ne vous convenait pas, pourquoi ?
+-----------------------------------------
+
+```{r, echo=FALSE}
+file2 <- "../Data/questionnaire patiente 12.12.14_Q10.csv"
+file2 <- paste0(path, file2)
+q10 <- read.csv(file2, header = TRUE)
+a <- merge(d, q10, by.x = "ID", by.y = "ID")
+# quelles colonnes garder ?
+```
+
+11. Cette grossesse est survenue suite à
+----------------------------------------
+
+```{r }
+
+```
+
+12. Lors de votre demande d’IVG, avez-vous été informée sur les différents moyens de contraception ?
+----------------------------------------------------------------------------------------------------
+
+```{r information, echo=FALSE}
+tab1(d$INFORMATION, main="avez-vous été informée sur les différents moyens de contraception ?", ylab = "Fréquence")
+```
+
+
+13. Vous a-t-on prescrit une méthode de contraception ?
+-------------------------------------------------------
+
+```{r prescription, echo=FALSE}
+tab1(d$PRESCRIPTION, main="Vous a-t-on prescrit une méthode de contraception ?", ylab = "Fréquence")
+```
+
+Si oui, laquelle ?
+------------------
+
+```{r pres_oui,echo=FALSE}
+tab1(d$PRES_OUI[d$PRESCRIPTION == "OUI"], main="Méthode de contraception prescrite", ylab = "Fréquence")
+```
+
+14. Avez-vous eu l’impression que le professionnel de santé a influencé votre choix ?
+
+```{r influence, echo=FALSE}
+tab1(d$INFLUENCE, main="le professionnel de santé a influencé votre choix ?", ylab = "Fréquence")
+```
+
+Si oui, avez-vous adhéré à sa proposition ?
+-------------------------------------------
+
+Le "si oui" n'a pas ttoujours été respecté. Au moins une femme dit ne pas avoir été influencée mais n'accepte pas la proposition.
+
+```{r accepte, echo=FALSE}
+tab1(d$ACCEPTE, main=" avez-vous adhéré à sa proposition ?", ylab = "Fréquence")
+
+# si on ne prend en compte que les réponses où les patientes dient avoir été influencées
+tab1(d$ACCEPTE[d$INFLUENCE == "OUI"], main="Si le professionnel vous a influencé,\navez-vous adhéré à sa proposition ?", ylab = "Fréquence")
+```
+
+15. Si vous n’adhérez pas à sa proposition, pourquoi ?
+-----------------------------------------------------
+
+ATTENTION: 
+
+- non est écrit en minuscule (MAJUSCULE attendue)
+- une réponse "pas envie" et "Accepte"  = NA
+
+```{r methode2, echo=FALSE, warning=FALSE}
+d$ACCEPTE <- toupper(d$ACCEPTE)
+tab1(d$METHODE[d$ACCEPTE == "NON" & !is.na(d$ACCEPTE)], main="Si vous n’adhérez pas à sa proposition, pourquoi ?", ylab = "Fréquence")
+```
+
+Le professionnel de santé :
+--------------------------
+
+ToDO...
+
+
+16. À ce jour, quelle(s) méthode(s) de contraception avez-vous choisi?
+----------------------------------------------------------------------
+
+```{r choix_final, echo=FALSE}
+#On regroupe 4 colonnes sous le label "choix"
+choix <- d[, c("AUCUNE.1", "P.1", "ST", "IMP.1", "PT.1", "AV.1", "PM.1", "PL.1", "SP.1", "RT.1", "AB.1", "CT.1", "AMC.1")]
+t <- c("AUCUNE", "P", "SC", "SH", "IMP", "PT", "AV", "PM", "PL", "SP", "RT", "AB", "CT", "AMC")
+
+# transforme les NA en Oui ou Non
+a <- lapply(choix, function(x){ifelse(is.na(x), "non", "oui")})
+a <- as.data.frame(a)
+
+x <- apply(a, 1, table)
+b <- sapply(x, function(x){x[2]})
+names(b) <- t
+b[!is.na(b)]
+
+x <- apply(a, 2, table)
+b <- sapply(x, function(x){x[2]})
+c <- c("AUCUNE","Pilule","Stérilet","Implant","Patch","Préservatif","Autre méthode")
+names(b) <- c
+par(mar = c(4,6,3,2))
+barplot(sort(b, decreasing = TRUE), horiz = TRUE, las = TRUE, cex.names = 0.8, main = "Choix final", xlab = "Fréquence")
+
 ```
 
