@@ -1,0 +1,119 @@
+---
+title: "Contraception après IVG"
+author: "Noémie LERCH, JcB"
+date: "13/12/2014"
+output: html_document
+---
+
+
+Récupérer les données source
+============================
+
+```{r data, echo=FALSE}
+path <- "../"
+file <- paste0(path, "../Data/questionnaire patiente 12.12.14_saisie.csv")
+d <- read.csv(file, skip = 1)
+
+library(epicalc)
+
+```
+Le fichier __`r file`__ contient __`r nrow(d)`__ enregistrements.
+
+Analyse descriptive
+===================
+
+Origine des données
+-------------------
+```{r origine, echo=FALSE}
+table(d$ORIGINE)
+```
+
+1. Age des participantes
+---------------------
+
+```{r age, echo=FALSE}
+summary(d$AGE)
+
+hist(d$AGE, main = "Histogramme des ages", ylab = "Nombre de sujets", xlab = "Âges en années")
+
+boxplot(d$AGE, main = "Distribution des ages", ylab = "Âges en années")
+```
+
+2. Niveau d’étude
+---------------------
+
+```{r csp, echo=FALSE}
+summary(d$NIVEAU)
+
+tab1(d$NIVEAU, main = "Niveau d’étude", ylab = "Nombre")
+
+```
+
+3. Êtes-vous en couple ?
+---------------------
+
+```{r couple, echo=FALSE}
+summary(d$COUPLE)
+
+tab1(d$COUPLE, main = "Êtes-vous en couple ?", ylab = "Nombre")
+```
+
+4. Avez-vous déjà été enceinte avant cette grossesse ?
+---------------------------------------------------
+
+```{r grossesse_avant, echo=FALSE}
+summary(d$GROS_AVANT)
+
+tab1(d$GROS_AVANT, main = "Avez-vous déjà été enceinte avant cette grossesse ?", ylab = "Nombre")
+```
+
+Si oui, combien de fois ?
+-------------------------
+
+```{r combien, echo=FALSE}
+#On regroupe 4 colonnes sous le label "parite"
+geste <- data.frame(cbind(d$NB_ACC, d$NB_FCS, d$NB_IVG, d$NB_IMG))
+names(geste) <- c("NB_ACC", "NB_FCS", "NB_IVG", "NB_IMG")
+
+# Total par colonne
+apply(geste, 2, sum, na.rm=TRUE)
+
+# total par ligne
+nb.de.fois <- apply(geste, 1, sum, na.rm=TRUE)
+summary(nb.de.fois)
+tab1(nb.de.fois, ylab = "Nombre de cas", main = "Nombre de grossesse avant celle-ci")
+
+```
+
+5. Combien d’enfants avez-vous ?
+-----------------------------
+
+```{r enfants, echo=FALSE}
+d$NB_ENFANTS <- as.factor(d$NB_ENFANTS)
+# summary(d$NB_ENFANTS)
+tab1(d$NB_ENFANTS, main = "Nombre d'enfants", ylab = "Fréquence")
+
+```
+
+6. Avez-vous un suivi gynécologique régulier
+-------------------------------------------------
+(au moins une consultation par an) ?
+
+```{r suivi, echo=FALSE}
+tab1(d$SUIVI, main = "Avez-vous un suivi gynécologique régulier ?", ylab = "Fréquence")
+```
+
+7. Quelle méthode a été envisagée pour l’IVG ?
+----------------------------------------------
+
+```{r methode, echo=FALSE}
+tab1(d$IVG, main = "Méthode utilisée pour l'IVG", ylab = "Fréquence")
+```
+
+8. Dans l’année précèdent votre grossesse, avez-vous changé de méthode de contraception ?
+------------------------------------------------------------------------------------------
+
+```{r}
+tab1(d$CHANGE,ai)
+```
+
