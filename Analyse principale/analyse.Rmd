@@ -3,11 +3,11 @@ title: "Contraception après IVG"
 author: "Noémie LERCH, JcB"
 date: "13/12/2014"
 output:
+  html_document:
+    toc: yes
   pdf_document:
     fig_caption: yes
     number_sections: yes
-    toc: yes
-  html_document:
     toc: yes
   word_document: default
 ---
@@ -17,10 +17,10 @@ Récupérer les données source
 ============================
 
 ```{r data, echo=FALSE, message=FALSE}
-path <- "../"
-file <- paste0(path, "../Data/questionnaire patiente 15.12.14_saisie.csv")
+path <- ""
+file <- paste0(path, "../Data/QUESTIONNAIRE PATIENTE 19-12-14.csv")
 d <- read.csv(file, skip = 1)
-
+n <- nrow(d)
 library(epicalc)
 
 ```
@@ -184,7 +184,7 @@ Si elle ne vous convenait pas, pourquoi ?
 -----------------------------------------
 
 ```{r, echo=FALSE}
-file2 <- "../Data/questionnaire patiente 12.12.14_Q10.csv"
+file2 <- "../Data/Q10 19-12-14.csv"
 file2 <- paste0(path, file2)
 q10 <- read.csv(file2, header = TRUE)
 a <- merge(d, q10, by.x = "ID", by.y = "ID")
@@ -279,7 +279,7 @@ b <- sapply(x, function(x){x[2]})
 c <- c("AUCUNE","Pilule","Stérilet","Implant","Patch","Préservatif","Autre méthode")
 names(b) <- c
 par(mar = c(4,6,3,2))
-barplot(sort(b, decreasing = TRUE), horiz = TRUE, las = TRUE, cex.names = 0.8, main = "Choix final", xlab = "Fréquence")
+barplot(sort(b, decreasing = TRUE), horiz = TRUE, las = TRUE, cex.names = 0.8, main = "Choix final pour la méthode de contraception post IVG", xlab = "Fréquence")
 
 ```
 
