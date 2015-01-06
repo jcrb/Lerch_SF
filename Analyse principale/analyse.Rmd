@@ -17,8 +17,8 @@ Récupérer les données source
 ============================
 
 ```{r data, echo=FALSE, message=FALSE}
-path <- ""
-file <- paste0(path, "../Data/QUESTIONNAIRE PATIENTE 19-12-14.csv")
+path <- "../"
+file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 19-12-14.csv")
 d <- read.csv(file, skip = 1)
 n <- nrow(d)
 library(epicalc)
@@ -234,7 +234,7 @@ Le "si oui" n'a pas ttoujours été respecté. Au moins une femme dit ne pas avo
 ```{r accepte, echo=FALSE}
 tab1(d$ACCEPTE, main=" avez-vous adhéré à sa proposition ?", ylab = "Fréquence")
 
-# si on ne prend en compte que les réponses où les patientes dient avoir été influencées
+# si on ne prend en compte que les réponses où les patientes disent avoir été influencées
 tab1(d$ACCEPTE[d$INFLUENCE == "OUI"], main="Si le professionnel vous a influencé,\navez-vous adhéré à sa proposition ?", ylab = "Fréquence")
 ```
 
