@@ -1,0 +1,78 @@
+---
+title: "Questionnaire Médecins"
+author: "jcb"
+date: "18 janvier 2015"
+output: html_document
+---
+
+```{r}
+source('~/Documents/CESU/Lerch_SF/functions_lerch.R')
+
+path <- "../"
+file <- paste0(path, "Data/questionnaire praticien 09.01.15.csv")
+d <- read.csv(file, skip = 1)
+n <- nrow(d) # nombre de fiches
+```
+
+a. Origine des médecins
+=======================
+```{r origine, echo=FALSE, comment=""}
+summary(d$ORIGINE)
+
+```
+
+1. Méthodes contraceptives expliquées
+=====================================
+
+Question 1, correspond aux colonnes C à K (3 à 11)
+```{r methodes, echo=FALSE, comment=""}
+
+```
+
+2. Questions relatives à la compréhension de l'information dispensée
+====================================================================
+
+2.1 Pensez-vous que la patiente à compris
+-----------------------------------------
+
+2.1.1 Les différentes méthodes contraceptives
+
+```{r differentes_methdee, echo=FALSE, comment=""}
+summary(d$COMPREHENSION_METHODE)
+```
+
+2.1.2 L'importance d'une contraception après une IVG
+
+```{r importance, echo=FALSE, comment=""}
+summary(d$IMPORTANCE)
+```
+
+3. Selon vous quelle contraception semble la plus adaptée ?
+===========================================================
+
+Question N à V (14 à 22)
+```{r methode_adaptee, echo=FALSE, comment=""}
+
+```
+
+4. Choix final de la patiente
+=============================
+
+4.1 souhaite une contraception
+------------------------------
+
+```{r contraceptio-souhaitee, echo=FALSE, comment=""}
+summary(d$CHOIX)
+```
+
+4.2 choix de la patiente
+------------------------
+ Colonne X à AF (24 à 32)
+ 
+```{r choix_patiente, echo=FALSE, comment=""}
+ar <- d[, 24:31]
+choix(ar)
+
+
+```
+

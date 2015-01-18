@@ -18,7 +18,7 @@ Récupérer les données source
 
 ```{r data, echo=FALSE, message=FALSE}
 path <- "../"
-file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 19-12-14.csv")
+file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 9.01.15.csv")
 d <- read.csv(file, skip = 1)
 n <- nrow(d)
 library(epicalc)
