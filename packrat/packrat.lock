@@ -1,12 +1,12 @@
 PackratFormat: 1.4
-PackratVersion: 0.4.1.8
+PackratVersion: 0.4.2.1
 RVersion: 3.1.2
 Repos: CRAN=http://cran.rstudio.com
 
 Package: MASS
 Source: CRAN
-Version: 7.3-35
-Hash: 2a7641e407ce2a484d5a587a4e30a9aa
+Version: 7.3-37
+Hash: 05cd8a6b7ebab5d30f3d95c8b26cbdf1
 
 Package: bitops
 Source: CRAN
@@ -26,8 +26,8 @@ Hash: b775bd08a10f968fef582304b7c3ab9c
 
 Package: digest
 Source: CRAN
-Version: 0.6.7
-Hash: deb9cb6ccd57d1514e04fe1f5b1dc8ca
+Version: 0.6.8
+Hash: 89dc4c8734dad5322bb3c5c2af09056f
 
 Package: epicalc
 Source: CRAN
@@ -43,8 +43,8 @@ Requires: stringr
 
 Package: foreign
 Source: CRAN
-Version: 0.8-61
-Hash: 0beba5c531f25fc53f4b55b3688ac523
+Version: 0.8-62
+Hash: 4f7fdde2fd7a70d908076c7bacae9345
 
 Package: formatR
 Source: CRAN
@@ -70,8 +70,8 @@ Requires: digest
 
 Package: knitr
 Source: CRAN
-Version: 1.8
-Hash: d00d7b314ca4c34f8a56ceacefb31b4f
+Version: 1.9
+Hash: 41c29594ced4d02b3b90b4c375680cd3
 Requires: digest, evaluate, formatR, highr, markdown, stringr
 
 Package: markdown
@@ -91,13 +91,9 @@ Version: 7.3-8
 Hash: f04b41e75f1e25392acdaae59e6d3d4c
 
 Package: packrat
-Source: github
-Version: 0.4.1.8
-Hash: ee57b7e7ba891d23079b12f1ff5106d0db0594e5
-GithubRepo: packrat
-GithubUsername: rstudio
-GithubRef: v0.98.1000
-GithubSha1: ee57b7e7ba891d23079b12f1ff5106d0db0594e5
+Source: CRAN
+Version: 0.4.2-1
+Hash: 085f944cec9b56e8a280222b5174c76e
 
 Package: qvcalc
 Source: CRAN
