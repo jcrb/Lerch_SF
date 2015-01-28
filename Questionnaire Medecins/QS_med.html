@@ -67,20 +67,23 @@ img {
 </div>
 
 
-<pre class="r"><code>source('~/Documents/CESU/Lerch_SF/functions_lerch.R')
+<pre class="r"><code>path &lt;- &quot;../&quot;
+source(paste0(path, &quot;functions_lerch.R&quot;))
 
-path &lt;- &quot;../&quot;
-file &lt;- paste0(path, &quot;Data/questionnaire praticien 09.01.15.csv&quot;)
+file &lt;- paste0(path, &quot;Data/questionnaire praticien 21.01.15.csv&quot;)
 d &lt;- read.csv(file, skip = 1)
-n &lt;- nrow(d) # nombre de fiches</code></pre>
+n &lt;- nrow(d)  # nombre de fiches</code></pre>
 <div id="a.-origine-des-medecins" class="section level1">
 <h1>a. Origine des médecins</h1>
-<pre><code>CMCO  HTP 
-  14   40 </code></pre>
+<pre><code>```
+CMCO  HTP 
+  26   53 
+```</code></pre>
 </div>
 <div id="methodes-contraceptives-expliquees" class="section level1">
 <h1>1. Méthodes contraceptives expliquées</h1>
-<p>Question 1, correspond aux colonnes C à K (3 à 11)</p>
+<pre><code>Question 1, correspond aux colonnes C à K (3 à 11)</code></pre>
+<pre><code>[1] 4</code></pre>
 </div>
 <div id="questions-relatives-a-la-comprehension-de-linformation-dispensee" class="section level1">
 <h1>2. Questions relatives à la compréhension de l’information dispensée</h1>
@@ -88,10 +91,10 @@ n &lt;- nrow(d) # nombre de fiches</code></pre>
 <h2>2.1 Pensez-vous que la patiente à compris</h2>
 <p>2.1.1 Les différentes méthodes contraceptives</p>
 <pre><code> OUI NA's 
-  52    2 </code></pre>
+  75    4 </code></pre>
 <p>2.1.2 L’importance d’une contraception après une IVG</p>
 <pre><code> NON  OUI NA's 
-   2   50    2 </code></pre>
+   4   72    3 </code></pre>
 </div>
 </div>
 <div id="selon-vous-quelle-contraception-semble-la-plus-adaptee" class="section level1">
@@ -103,19 +106,19 @@ n &lt;- nrow(d) # nombre de fiches</code></pre>
 <div id="souhaite-une-contraception" class="section level2">
 <h2>4.1 souhaite une contraception</h2>
 <pre><code> NON  OUI NA's 
-   6   47    1 </code></pre>
+  12   66    1 </code></pre>
 </div>
 <div id="choix-de-la-patiente" class="section level2">
 <h2>4.2 choix de la patiente</h2>
 <p>Colonne X à AF (24 à 32)</p>
 <pre><code>                           [,1]
-Aucune               0.09259259
-Pilule               0.33333333
-Stérilet             0.37037037
-Implant              0.14814815
-Patch                0.01851852
+Aucune               0.07594937
+Pilule               0.29113924
+Stérilet             0.37974684
+Implant              0.17721519
+Patch                0.01265823
 Anneau vaginal       0.00000000
-Préservatif masculin 0.01851852
+Préservatif masculin 0.01265823
 Pilule du lendemain  0.00000000</code></pre>
 </div>
 </div>

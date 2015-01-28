@@ -18,7 +18,7 @@ Récupérer les données source
 
 ```{r data, echo=FALSE, message=FALSE}
 path <- "../"
-file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 9.01.15.csv")
+file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 21.01.15.csv")
 d <- read.csv(file, skip = 1)
 n <- nrow(d)
 library(epicalc)
@@ -184,8 +184,8 @@ Si elle ne vous convenait pas, pourquoi ?
 -----------------------------------------
 
 ```{r, echo=FALSE}
-file2 <- "../Data/Q10 19-12-14.csv"
-file2 <- paste0(path, file2)
+file2 <- "../Data/QUESTIONNAIRE PATIENTE 21.01.15_Q10.csv"
+#file2 <- paste0(path, file2)
 q10 <- read.csv(file2, header = TRUE)
 a <- merge(d, q10, by.x = "ID", by.y = "ID")
 # quelles colonnes garder ?

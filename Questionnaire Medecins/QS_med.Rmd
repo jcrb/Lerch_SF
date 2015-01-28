@@ -6,27 +6,28 @@ output: html_document
 ---
 
 ```{r}
-source('~/Documents/CESU/Lerch_SF/functions_lerch.R')
-
 path <- "../"
-file <- paste0(path, "Data/questionnaire praticien 09.01.15.csv")
-d <- read.csv(file, skip = 1)
-n <- nrow(d) # nombre de fiches
-```
+source(paste0(path, "functions_lerch.R"))
 
+file <- paste0(path, "Data/questionnaire praticien 21.01.15.csv")
+d <- read.csv(file, skip = 1)
+n <- nrow(d)  # nombre de fiches
+```
 a. Origine des médecins
 =======================
-```{r origine, echo=FALSE, comment=""}
+    
+    ```{r origine, echo=FALSE, comment=""}
 summary(d$ORIGINE)
 
 ```
 
 1. Méthodes contraceptives expliquées
 =====================================
+    
+    Question 1, correspond aux colonnes C à K (3 à 11)
 
-Question 1, correspond aux colonnes C à K (3 à 11)
 ```{r methodes, echo=FALSE, comment=""}
-
+2 + 2
 ```
 
 2. Questions relatives à la compréhension de l'information dispensée
@@ -67,8 +68,8 @@ summary(d$CHOIX)
 
 4.2 choix de la patiente
 ------------------------
- Colonne X à AF (24 à 32)
- 
+Colonne X à AF (24 à 32)
+
 ```{r choix_patiente, echo=FALSE, comment=""}
 ar <- d[, 24:31]
 choix(ar)
