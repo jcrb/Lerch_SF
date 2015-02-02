@@ -3,8 +3,8 @@
 #'@param ar array correspondant aux différents choix possibles
 #'@usage ar <- d[, 24:32]
 
-choix <- function(ar){
-    methode <- c("Aucune", "Pilule", "Stérilet", "Implant", "Patch", "Anneau vaginal", "Préservatif masculin", "Pilule du lendemain", "Autre méthode")
+choix <- function(ar, methode){
+    
     for(i in 1:ncol(ar)){
         n <- nrow(ar)
         a <- prop.table(table(ar[, i], useNA = "ifany"))
@@ -17,6 +17,7 @@ choix <- function(ar){
             b <- x
         else
             b <- rbind(b, x)
+        colnames(b) <- "%"
     }
     return(b)
 }
@@ -28,5 +29,29 @@ choix <- function(ar){
 # PB: pour le datafrme, le total n'est pas égal à 100% ?
 
 
+# somme des colonnes
+#'@param ar dataframe contenant le choix multiple
+#'@param choix nom souhaité des colonne. Default = nom des colonnes du dataframe
+#'@return un vecteur contenant le nombre de lignes de chaque colonnes différentes de NA
+methode <- function(ar, choix = NULL){
+    f <- function(x){sum(!is.na(x))} # x est un vecteur
+    n <- nrow(ar)
+    a <- apply(ar, 2, f)
+    if(!is.null(choix)) names(a) <- choix
+    # b <- rbind(a, a/sum(a))
+    return (a)
+}
 
+# Somme des lignes
+#'@param ar dataframe contenant le choix multiple
+#'@param choix nom souhaité des colonne. Default = nom des colonnes du dataframe
+#'@return un vecteur contenant le total de cellules différente de NA de chaque ligne 
+methode2 <- function(ar, choix = NULL){
+    f <- function(x){sum(!is.na(x))} # x est un vecteur
+    n <- nrow(ar)
+    a <- apply(ar, 1, f)
+    if(!is.null(choix)) names(a) <- choix
+    # b <- rbind(a, a/sum(a))
+    return (a)
+}
 

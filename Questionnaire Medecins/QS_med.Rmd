@@ -2,12 +2,15 @@
 title: "Questionnaire Médecins"
 author: "jcb"
 date: "18 janvier 2015"
-output: html_document
+output:
+  html_document:
+    toc: yes
 ---
 
-```{r}
+```{r init, echo=FALSE, message=FALSE}
 path <- "../"
 source(paste0(path, "functions_lerch.R"))
+library(epicalc)
 
 file <- paste0(path, "Data/questionnaire praticien 21.01.15.csv")
 d <- read.csv(file, skip = 1)
@@ -16,8 +19,9 @@ n <- nrow(d)  # nombre de fiches
 a. Origine des médecins
 =======================
     
-    ```{r origine, echo=FALSE, comment=""}
+```{r origine, echo=FALSE, comment=""}
 summary(d$ORIGINE)
+tab1(d$ORIGINE, main = "Origine des médecins", ylab = "Fréquence")
 
 ```
 
@@ -27,8 +31,17 @@ summary(d$ORIGINE)
     Question 1, correspond aux colonnes C à K (3 à 11)
 
 ```{r methodes, echo=FALSE, comment=""}
-2 + 2
+a <- d[, 3:11]
+b <- methode(a)
+b
+barplot(b, main = "Méthodes contraceptives expliquées", ylab = "Fréquence")
+
+b <- methode2(a)
+summary(b)
+tab1(b, main = "Nombres de méthodes contraceptives expliquées", ylab = "Fréquence")
+
 ```
+En moyenne, 3 méthodes contraceptives sont expliquées à chaque consultation. Les plus expliiquées sont pilule, stérilet et implant.
 
 2. Questions relatives à la compréhension de l'information dispensée
 ====================================================================
@@ -40,12 +53,14 @@ summary(d$ORIGINE)
 
 ```{r differentes_methdee, echo=FALSE, comment=""}
 summary(d$COMPREHENSION_METHODE)
+tab1(d$COMPREHENSION_METHODE, main = "Compréhension de la méthode", ylab = "Fréquence")
 ```
 
 2.1.2 L'importance d'une contraception après une IVG
 
 ```{r importance, echo=FALSE, comment=""}
 summary(d$IMPORTANCE)
+tab1(d$IMPORTANCE, main = "Importance contraception après IVG", ylab = "Fréquence")
 ```
 
 3. Selon vous quelle contraception semble la plus adaptée ?
@@ -53,6 +68,15 @@ summary(d$IMPORTANCE)
 
 Question N à V (14 à 22)
 ```{r methode_adaptee, echo=FALSE, comment=""}
+
+a <- d[, 14:22]
+b <- methode(a)
+b
+barplot(b, main = "Selon vous quelle contraception semble la plus adaptée ?", ylab = "Fréquence", las=2)
+
+b <- methode2(a)
+summary(b)
+tab1(b, main = "Nombres de méthodes contraceptives adaptées", ylab = "Fréquence")
 
 ```
 
@@ -64,6 +88,7 @@ Question N à V (14 à 22)
 
 ```{r contraceptio-souhaitee, echo=FALSE, comment=""}
 summary(d$CHOIX)
+tab1(d$CHOIX, main = "Souhaite une contraception", ylab = "Fréquence")
 ```
 
 4.2 choix de la patiente
@@ -71,9 +96,11 @@ summary(d$CHOIX)
 Colonne X à AF (24 à 32)
 
 ```{r choix_patiente, echo=FALSE, comment=""}
+methode <- c("Aucune", "Pilule", "Stérilet", "Implant", "Patch", "Anneau vaginal", "Préservatif masculin", "Pilule du lendemain", "Autre méthode")
 ar <- d[, 24:31]
-choix(ar)
-
+a <- choix(ar, methode)
+round(a * 100, 2)
+barplot(t(a), las = 2, main = "Choix de la patiente", ylab = "%")
 
 ```
 
