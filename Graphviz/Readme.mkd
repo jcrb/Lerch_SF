@@ -1,0 +1,48 @@
+Graphwiz
+========
+
+Dessin de graphes utilisé pour le travail de Sophie Lerch. Nécessite le programme __graphwiz__ installé à partir de Ubuntu. Le programme est écrit en utiisant la syntaxe _grahwiz_ à partir de n'impoorte quel traitement de texte (gedit). La compilation se fait en ligne de commande => devrait être possible à partir de R via la commande system.
+
+[documentation](http://www.graphviz.org/Documentation.php)
+
+[Drawing graphs withdot](http://www.graphviz.org/pdf/dotguide.pdf)
+
+1. Ouvrir gedit et saisir un programme
+
+    - l'enregistrer avec le suffixe .gv
+    
+__dot__ accepte les instructions en language _DOT_. Ce language utilise 3 sortes d'objets:
+
+- graphs
+- nodes: un noeud est créé quand son nom apparait pour la première fois dans le fichier.
+- edge:  un arc est créé lorsque des neouds sont reliés par l'opérateur ->.
+
+Chaque objet peut être modifié par des __attributs__ . Les attributs sont des paires [nom = valeur]. Par exemple:
+```
+main -> init [style = dotted]; /* flèche pointillée */
+
+edge [color = red]; /* les flèches suivantes seront dessinées en rouge */
+
+size ="4,4"; /* définit la taille du graphe */
+
+main [shape=box]; /* le noeud est dans une boite (ovale par défaut) */
+```
+
+Le graphe peut être 
+
+- orienté (directed): le programme doit commencer par __digraph__.
+- non orienté (undirected): le programme commence pat __graph__
+
+_dot_ ne dessine que des graphes orientés => tous les programmes commencent par _digraph_.
+
+Pour les gaphes non orientés, il faut utiliser le programme __neato__.
+
+Au sein d'un graphe principal, on peut définir un sous-graphe
+
+2. compiler (dessiner)
+-----------------------
+
+```
+$ dot -Tps graph1.gv -o graph1.ps
+```
+L'option Tps crée un fichier postscript.

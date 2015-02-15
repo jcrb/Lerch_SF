@@ -1,0 +1,12 @@
+digraph G {
+	node[shape = box];
+	Q1[label = "Questionnaires distribués\n N = 400"]
+	Q2[label = "Questionnaires récupérés\n N = 160"]
+	Q1 -> Q2
+	Q3[label = "Questionnaires patientes\n N = 80"]
+	Q4[label = "Questionnaires prof.santé\n N = 80"]
+	Q2 -> Q3
+	Q2 -> Q4
+
+	/*Q2 ->main -> parse -> execute;*/
+}

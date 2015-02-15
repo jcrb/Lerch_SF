@@ -1,0 +1,17 @@
+---
+title: "graphwiz"
+author: "JcB"
+date: "15/02/2015"
+output: html_document
+---
+
+```{r}
+ system("dot -Tps graph1.gv -o graph1.ps") # ps
+
+system("dot -Tpng graph1.gv -o graph1.png") # png
+
+ system("dot -Tsvg graph1.gv -o graph1.svg")
+
+ system("dot -Tdot graph1.gv -o graph1.txt") # programme en mode texte
+```
+
