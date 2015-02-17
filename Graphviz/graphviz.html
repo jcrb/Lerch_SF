@@ -68,13 +68,21 @@ img {
 </div>
 
 
-<pre class="r"><code> system(&quot;dot -Tps graph1.gv -o graph1.ps&quot;) # ps
+<div id="dessin-de-graphes-avec-graphviz" class="section level1">
+<h1>Dessin de graphes avec Graphviz</h1>
+<p>Le texte de description du graphe se trouve dans graph1.gv. La commande system appelle le programme <em>dot</em> qui compile le graphe. Différent mode graphique sont possile. <em>SVG</em> ne s’affiche pas dans RStudio mais permet d’obtenir des graphes extensibles à l’infini.</p>
+<pre class="r"><code># system(&quot;dot -Tps graph1.gv -o graph1.ps&quot;) # ps
+# 
+# system(&quot;dot -Tpng graph1.gv -o graph1.png&quot;) # png
+# 
+# system(&quot;dot -Tsvg graph1.gv -o graph1.svg&quot;)
+# 
+# system(&quot;dot -Tpdf graph1.gv -o graph1.pdf&quot;)
+# 
+# system(&quot;dot -Tdot graph1.gv -o graph1.txt&quot;) # programme en mode texte
 
-system(&quot;dot -Tpng graph1.gv -o graph1.png&quot;) # png
-
- system(&quot;dot -Tsvg graph1.gv -o graph1.svg&quot;)
-
- system(&quot;dot -Tdot graph1.gv -o graph1.txt&quot;) # programme en mode texte</code></pre>
+system(&quot;dot -Tpdf graph2.gv -o graph2.pdf&quot;)</code></pre>
+</div>
 
 
 </div>

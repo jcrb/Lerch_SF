@@ -5,13 +5,22 @@ date: "15/02/2015"
 output: html_document
 ---
 
+Dessin de graphes avec Graphviz
+===============================
+
+Le texte de description du graphe se trouve dans graph1.gv. La commande system appelle le programme _dot_ qui compile le graphe. Différent mode graphique sont possile. _SVG_ ne s'affiche pas dans RStudio mais permet d'obtenir des graphes extensibles à l'infini.
+
 ```{r}
- system("dot -Tps graph1.gv -o graph1.ps") # ps
+# system("dot -Tps graph1.gv -o graph1.ps") # ps
+# 
+# system("dot -Tpng graph1.gv -o graph1.png") # png
+# 
+# system("dot -Tsvg graph1.gv -o graph1.svg")
+# 
+# system("dot -Tpdf graph1.gv -o graph1.pdf")
+# 
+# system("dot -Tdot graph1.gv -o graph1.txt") # programme en mode texte
 
-system("dot -Tpng graph1.gv -o graph1.png") # png
-
- system("dot -Tsvg graph1.gv -o graph1.svg")
-
- system("dot -Tdot graph1.gv -o graph1.txt") # programme en mode texte
+system("dot -Tpdf graph2.gv -o graph2.pdf")
 ```
 

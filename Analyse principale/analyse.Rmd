@@ -4,6 +4,8 @@ author: "Noémie LERCH, JcB"
 date: "13/12/2014"
 output:
   html_document:
+    keep_md: yes
+    number_sections: yes
     toc: yes
   pdf_document:
     fig_caption: yes
@@ -36,7 +38,7 @@ table(d$ORIGINE)
 ```
 
 1. Age des participantes
----------------------
+------------------------
 
 ```{r age, echo=FALSE, comment=""}
 summary(d$AGE)
@@ -49,6 +51,20 @@ hist(d$AGE, main = "Histogramme des ages", ylab = "Nombre de sujets", xlab = "Â
 boxplot(d$AGE, main = "Distribution des ages", ylab = "Âges en années")
 
 ```
+
+On souhaite représenter l'histogramme avec les classe d'age standard de la littérature:
+
+```{r age3, echo=FALSE, comment=""}
+tranches <- c(15, 19, 24, 29, 34, 39, 44, 49) # limites des tranches d'age
+age <- cut(d$AGE, tranches, include.lowest = TRUE) # cut
+table(age)
+# barplot(table(age), ylab = "Fréquence", xlab = "tranches d'âge (années)", main = "Histogramme des âges des patientes", sub = "intervalles: '[' ou ']' = inclus, ')' = exclu")
+names <- c("15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49")
+barplot(table(age), ylab = "Fréquence", xlab = "tranches d'âge (années)", main = "Histogramme des âges des patientes", names.arg = names, space = 0.2) # valeur normale de space = 0.2
+
+
+```
+
 
 
 2. Niveau d’étude
