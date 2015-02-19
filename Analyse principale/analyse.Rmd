@@ -13,18 +13,18 @@ output:
     toc: yes
   word_document: default
 ---
-
+MAJ: 12/02/2015
 
 Récupérer les données source
 ============================
 
 ```{r data, echo=FALSE, message=FALSE, comment=""}
 path <- "../"
-file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 21.01.15.csv")
+file <- paste0(path, "Data/QUESTIONNAIRE PATIENTE 12.02.15.csv")
 d <- read.csv(file, skip = 1)
 n <- nrow(d)
 library(epicalc)
-
+library(stringr)
 ```
 Le fichier __`r file`__ contient __`r nrow(d)`__ enregistrements.
 
@@ -35,6 +35,7 @@ Origine des données
 -------------------
 ```{r origine, echo=FALSE, comment=""}
 table(d$ORIGINE)
+pie(table(d$ORIGINE), main = "Origine des données")
 ```
 
 1. Age des participantes
@@ -42,8 +43,6 @@ table(d$ORIGINE)
 
 ```{r age, echo=FALSE, comment=""}
 summary(d$AGE)
-
-hist(d$AGE, main = "Histogramme des ages", ylab = "Nombre de sujets", xlab = "Âges en années")
 
 ```
 
@@ -163,9 +162,16 @@ x <- apply(a, 2, table)
 b <- sapply(x, function(x){x[2]})
 t <- c("AUCUNE", "P", "SC", "SH", "IMP", "PT", "AV", "PM", "PL", "SP", "RT", "AB", "CT", "AMC")
 names(b) <- t
-b[!is.na(b)]
+c <- sort(b[!is.na(b)], decreasing = TRUE)
+c
+barplot(c, main = "Méthodes contraceptives utilisées", ylab = "Fréquence")
+pc <- round(prop.table(c) * 100, 2)
+rb <-rbind(c, pc)
+rownames(rb) <- c("N", "%")
+rb
 
 ```
+Note: une femme pouvant utiliser plusieurs méthodes contraceptives simultannément, le total peut dépasser la taille de l'échantillon.
 
 #### nombre de méthode contraceptive utilisée par une femme
 
@@ -175,7 +181,11 @@ b <- sapply(x, function(x){x[2]})
 t <- summary(as.factor(b))
 t <- rbind(t)
 rownames(t) <- "nb. de femmes"
-t
+rt <- round(prop.table(t) * 100, 2)
+rb <-rbind(t, rt)
+rownames(rb) <- c("Nb.de femmes", "%")
+rb
+
 
 ```
 
@@ -185,6 +195,8 @@ Depuis quand l’utilisez- vous ?
 -------------------------------
 
 ```{r date_ut, echo=FALSE, comment=""}
+a <- factor(d$DATE_UT, ordered = TRUE, levels = c("3_mois", "0,5_an", "8_mois", "1_an", "2_ans", "3_ans","4_ans", "5_ans", "6_ans", ">8_ans", "9_ans", "11_ans", "12_an"))
+d$DATE_UT <- a
 summary(d$DATE_UT)
 ```
 
@@ -194,13 +206,15 @@ summary(d$DATE_UT)
 ```{r tolerance, echo=FALSE, comment=""}
 s_tolerance <- summary(d$TOLERANCE)
 s_tolerance
+tab1(d$TOLERANCE, main = "Cette méthode contraceptive vous convenait-t-elle ?", las = 2)
+
 ```
 
 Si elle ne vous convenait pas, pourquoi ?
 -----------------------------------------
 
 ```{r, echo=FALSE, comment=""}
-file2 <- "../Data/QUESTIONNAIRE PATIENTE 21.01.15_Q10.csv"
+file2 <- "../Data/Q10 12-02-15.csv"
 #file2 <- paste0(path, file2)
 q10 <- read.csv(file2, header = TRUE)
 a <- merge(d, q10, by.x = "ID", by.y = "ID")
@@ -209,8 +223,16 @@ a <- merge(d, q10, by.x = "ID", by.y = "ID")
 
 11. Cette grossesse est survenue suite à
 ----------------------------------------
-
+Plusieurs réponses possibles (col 31 à 37)
 ```{r }
+cause <- d[, 31:37]
+a <- lapply(cause, function(x){ifelse(is.na(x), "non", "oui")})
+a <- as.data.frame(a)
+x <- apply(a, 2, table)
+b <- sapply(x, function(x){x[2]})
+names(b) <- names(a)
+par(mar = c(8, 4,3,2))
+barplot(sort(b, decreasing = TRUE), main = "Cause de survenue de la grossesse", ylab = TRUE, las = 2)
 
 ```
 
@@ -233,6 +255,7 @@ Si oui, laquelle ?
 ------------------
 
 ```{r pres_oui,echo=FALSE, comment=""}
+d$PRES_OUI <- str_trim(d$PRES_OUI)
 tab1(d$PRES_OUI[d$PRESCRIPTION == "OUI"], main="Méthode de contraception prescrite", ylab = "Fréquence")
 ```
 
@@ -285,17 +308,35 @@ t <- c("AUCUNE", "P", "SC", "SH", "IMP", "PT", "AV", "PM", "PL", "SP", "RT", "AB
 a <- lapply(choix, function(x){ifelse(is.na(x), "non", "oui")})
 a <- as.data.frame(a)
 
-x <- apply(a, 1, table)
-b <- sapply(x, function(x){x[2]})
-names(b) <- t
-b[!is.na(b)]
+# x <- apply(a, 1, table)
+# b <- sapply(x, function(x){x[2]})
+# names(b) <- t
+# b[!is.na(b)]
 
 x <- apply(a, 2, table)
 b <- sapply(x, function(x){x[2]})
 c <- c("AUCUNE","Pilule","Stérilet","Implant","Patch","Préservatif","Autre méthode")
 names(b) <- c
 par(mar = c(4,6,3,2))
-barplot(sort(b, decreasing = TRUE), horiz = TRUE, las = TRUE, cex.names = 0.8, main = "Choix final pour la méthode de contraception post IVG", xlab = "Fréquence")
+barplot(sort(b, decreasing = TRUE), horiz = TRUE, las = 2, cex.names = 0.8, main = "Choix final pour la méthode de contraception post IVG", xlab = "Fréquence")
 
 ```
 
+Evolution du choix de la méthode de contraception
+-------------------------------------------------
+
+```{r evol, echo=FALSE, comment=""}
+methode <- c("Pilule", "P.Masculin", "Aucune", "Implant", "Autre", "Stérilet", "Patch")
+avant <- c(34, 13, 11, 6, 11, 0, 0)
+apres <- c(22, 0, 4, 8, 3, 23, 1)
+names(avant) <- methode
+names(apres) <- methode
+a <- rbind(avant, apres)
+barplot(a, beside = TRUE, main = "Choix de la méthode contraceptive\n avant et après la consultation")
+legend("center", legend = rownames(a), pch = 15, col = c("black", "gray80"), bty="n")
+
+# test exect de Fisher
+fisher.test(a)
+
+```
+Le choix d'une méthode de contraception est fortement modifié après la consultation (différence avant/après est statistiquement significative au test exact de Fisher (version améliorée du Khi2) p < 0.001 au seuil de risque alpha de 5%). La méthode qui convinct le plus de femmes est le Stérilet. Toutes les autres méthodes sont en diminution sauf les ilplants qui progressent très modestement.

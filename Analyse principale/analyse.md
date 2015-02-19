@@ -1,13 +1,13 @@
 # Contraception après IVG
 Noémie LERCH, JcB  
 13/12/2014  
-
+MAJ: 12/02/2015
 
 Récupérer les données source
 ============================
 
 
-Le fichier __../Data/QUESTIONNAIRE PATIENTE 21.01.15.csv__ contient __79__ enregistrements.
+Le fichier __../Data/QUESTIONNAIRE PATIENTE 12.02.15.csv__ contient __80__ enregistrements.
 
 Analyse descriptive univariée
 ===================
@@ -18,8 +18,10 @@ Origine des données
 ```
 
 CMCO  HTP 
-  26   53 
+  27   53 
 ```
+
+![](analyse_files/figure-html/origine-1.png) 
 
 1. Age des participantes
 ------------------------
@@ -27,10 +29,8 @@ CMCO  HTP
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-  15.00   19.25   24.00   25.88   32.00   44.00      21 
+  15.00   19.25   24.00   25.88   32.00   44.00      22 
 ```
-
-![](analyse_files/figure-html/age-1.png) 
 
 ![](analyse_files/figure-html/age2-1.png) 
 
@@ -52,10 +52,8 @@ age
 
 
 ```
-   AUTRE      bac Bac +2/3   Bac +5  Bac + 5  CAP/BEP  COLLEGE   JAMAIS 
-       1       20       13        1        1       14        7        1 
-    NA's 
-      21 
+   AUTRE      bac Bac +2/3   Bac +5  CAP/BEP  COLLEGE   JAMAIS     NA's 
+       1       20       13        2       14        7        1       22 
 ```
 
 ![](analyse_files/figure-html/csp-1.png) 
@@ -63,16 +61,15 @@ age
 ```
 d$NIVEAU : 
          Frequency   %(NA+)   %(NA-)
-AUTRE            1      1.3      1.7
-bac             20     25.3     34.5
-Bac +2/3        13     16.5     22.4
-Bac +5           1      1.3      1.7
-Bac + 5          1      1.3      1.7
-CAP/BEP         14     17.7     24.1
-COLLEGE          7      8.9     12.1
-JAMAIS           1      1.3      1.7
-NA's            21     26.6      0.0
-  Total         79    100.0    100.0
+AUTRE            1      1.2      1.7
+bac             20     25.0     34.5
+Bac +2/3        13     16.2     22.4
+Bac +5           2      2.5      3.4
+CAP/BEP         14     17.5     24.1
+COLLEGE          7      8.8     12.1
+JAMAIS           1      1.2      1.7
+NA's            22     27.5      0.0
+  Total         80    100.0    100.0
 ```
 
 3. Êtes-vous en couple ?
@@ -81,7 +78,7 @@ NA's            21     26.6      0.0
 
 ```
  NON  OUI NA's 
-  17   43   19 
+  17   43   20 
 ```
 
 ![](analyse_files/figure-html/couple-1.png) 
@@ -89,10 +86,10 @@ NA's            21     26.6      0.0
 ```
 d$COUPLE : 
         Frequency   %(NA+)   %(NA-)
-NON            17     21.5     28.3
-OUI            43     54.4     71.7
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+NON            17     21.2     28.3
+OUI            43     53.8     71.7
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 4. Avez-vous déjà été enceinte avant cette grossesse ?
@@ -101,7 +98,7 @@ NA's           19     24.1      0.0
 
 ```
  NON  OUI NA's 
-  26   34   19 
+  25   35   20 
 ```
 
 ![](analyse_files/figure-html/grossesse_avant-1.png) 
@@ -109,10 +106,10 @@ NA's           19     24.1      0.0
 ```
 d$GROS_AVANT : 
         Frequency   %(NA+)   %(NA-)
-NON            26     32.9     43.3
-OUI            34     43.0     56.7
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+NON            25     31.2     41.7
+OUI            35     43.8     58.3
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 Si oui, combien de fois ?
@@ -121,12 +118,12 @@ Si oui, combien de fois ?
 
 ```
 NB_ACC NB_FCS NB_IVG NB_IMG 
-    53      8     18     66 
+    53      8     21      3 
 ```
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  0.000   1.000   1.000   1.835   3.000   8.000 
+  0.000   0.000   0.000   1.062   2.000   7.000 
 ```
 
 ![](analyse_files/figure-html/combien-1.png) 
@@ -134,15 +131,14 @@ NB_ACC NB_FCS NB_IVG NB_IMG
 ```
 nb.de.fois : 
         Frequency Percent Cum. percent
-0              19    24.1         24.1
-1              25    31.6         55.7
-2              13    16.5         72.2
-3               6     7.6         79.7
-4               9    11.4         91.1
-5               4     5.1         96.2
-6               2     2.5         98.7
-8               1     1.3        100.0
-  Total        79   100.0        100.0
+0              44    55.0         55.0
+1              15    18.8         73.8
+2               4     5.0         78.8
+3              10    12.5         91.2
+4               5     6.2         97.5
+5               1     1.2         98.8
+7               1     1.2        100.0
+  Total        80   100.0        100.0
 ```
 
 5. Combien d’enfants avez-vous ?
@@ -153,13 +149,13 @@ nb.de.fois :
 ```
 d$NB_ENFANTS : 
         Frequency   %(NA+)   %(NA-)
-0              34     43.0     56.7
-1               9     11.4     15.0
-2              10     12.7     16.7
-3               4      5.1      6.7
+0              34     42.5     56.7
+1               9     11.2     15.0
+2              10     12.5     16.7
+3               4      5.0      6.7
 4               3      3.8      5.0
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 6. Avez-vous un suivi gynécologique régulier
@@ -171,10 +167,10 @@ NA's           19     24.1      0.0
 ```
 d$SUIVI : 
         Frequency   %(NA+)   %(NA-)
-NON            29     36.7     48.3
-OUI            31     39.2     51.7
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+NON            29     36.2     48.3
+OUI            31     38.8     51.7
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 7. Quelle méthode a été envisagée pour l’IVG ?
@@ -185,10 +181,10 @@ NA's           19     24.1      0.0
 ```
 d$IVG : 
         Frequency   %(NA+)   %(NA-)
-CHIR           13     16.5     21.7
-MED            47     59.5     78.3
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+CHIR           13     16.2     21.7
+MED            47     58.8     78.3
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 8. Dans l’année précèdent votre grossesse, avez-vous changé de méthode de contraception ?
@@ -199,10 +195,10 @@ NA's           19     24.1      0.0
 ```
 d$CHANGE : 
         Frequency   %(NA+)   %(NA-)
-NON            45     57.0     76.3
-OUI            14     17.7     23.7
-NA's           20     25.3      0.0
-  Total        79    100.0    100.0
+NON            45     56.2     76.3
+OUI            14     17.5     23.7
+NA's           21     26.2      0.0
+  Total        80    100.0    100.0
 ```
 
 9. Quelle(s) est/sont la ou les dernière(s) méthode(s) contraceptive(s) que vous avez utilisée avant cette grossesse ?
@@ -214,16 +210,26 @@ NA's           20     25.3      0.0
 
 
 ```
-AUCUNE      P     SC     SH    IMP     PM     PL    AMC 
-    10     34      2      1      6     13      6      2 
+     P     PM AUCUNE    IMP     PL     SC    AMC     SH 
+    34     13     11      6      6      2      2      1 
 ```
+
+![](analyse_files/figure-html/unnamed-chunk-2-1.png) 
+
+```
+      P    PM AUCUNE IMP PL   SC  AMC   SH
+N 34.00 13.00  11.00   6  6 2.00 2.00 1.00
+% 45.33 17.33  14.67   8  8 2.67 2.67 1.33
+```
+Note: une femme pouvant utiliser plusieurs méthodes contraceptives simultannément, le total peut dépasser la taille de l'échantillon.
 
 #### nombre de méthode contraceptive utilisée par une femme
 
 
 ```
-               1 2 3 NA's
-nb. de femmes 49 8 3   19
+              1     2    3 NA's
+Nb.de femmes 48  9.00 3.00   20
+%            60 11.25 3.75   25
 ```
 
 
@@ -233,12 +239,10 @@ Depuis quand l’utilisez- vous ?
 
 
 ```
-0,5 ANS 0,5_ANS  11_ans  12_ANS    1_an    1_AN   2_ans   2 ANS   2_ANS 
-      2       1       1       1       2       3       1       1       5 
-  3_ans   3_ANS  3_MOIS   4 ANS   4_ANS   5_ANS   6_ANS  6_MOIS  >8_ANS 
-      1       4       1       1       4       2       1       4       1 
- 8_MOIS   9_ans    NA's 
-      1       2      40 
+3_mois 0,5_an 8_mois   1_an  2_ans  3_ans  4_ans  5_ans  6_ans >8_ans 
+     1      7      1      5      7      5      5      2      1      1 
+ 9_ans 11_ans  12_an   NA's 
+     2      1      1     41 
 ```
 
 10. Cette méthode contraceptive vous convenait-t-elle ?
@@ -247,7 +251,20 @@ Depuis quand l’utilisez- vous ?
 
 ```
  PAS_DU_TOUT PAS_VRAIMENT       PLUTOT  TOUT_A_FAIT         NA's 
-          13           21           12            6           27 
+          13           21           12            6           28 
+```
+
+![](analyse_files/figure-html/tolerance-1.png) 
+
+```
+d$TOLERANCE : 
+             Frequency   %(NA+)   %(NA-)
+PAS_DU_TOUT         13     16.2     25.0
+PAS_VRAIMENT        21     26.2     40.4
+PLUTOT              12     15.0     23.1
+TOUT_A_FAIT          6      7.5     11.5
+NA's                28     35.0      0.0
+  Total             80    100.0    100.0
 ```
 
 Si elle ne vous convenait pas, pourquoi ?
@@ -257,8 +274,20 @@ Si elle ne vous convenait pas, pourquoi ?
 
 11. Cette grossesse est survenue suite à
 ----------------------------------------
+Plusieurs réponses possibles (col 31 à 37)
 
+```r
+cause <- d[, 31:37]
+a <- lapply(cause, function(x){ifelse(is.na(x), "non", "oui")})
+a <- as.data.frame(a)
+x <- apply(a, 2, table)
+b <- sapply(x, function(x){x[2]})
+names(b) <- names(a)
+par(mar = c(8, 4,3,2))
+barplot(sort(b, decreasing = TRUE), main = "Cause de survenue de la grossesse", ylab = TRUE, las = 2)
+```
 
+![](analyse_files/figure-html/unnamed-chunk-5-1.png) 
 
 12. Lors de votre demande d’IVG, avez-vous été informée sur les différents moyens de contraception ?
 ----------------------------------------------------------------------------------------------------
@@ -269,9 +298,9 @@ Si elle ne vous convenait pas, pourquoi ?
 d$INFORMATION : 
         Frequency   %(NA+)   %(NA-)
 NON             2      2.5      3.3
-OUI            58     73.4     96.7
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+OUI            58     72.5     96.7
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 
@@ -283,10 +312,10 @@ NA's           19     24.1      0.0
 ```
 d$PRESCRIPTION : 
         Frequency   %(NA+)   %(NA-)
-NON            10     12.7     16.7
-OUI            50     63.3     83.3
-NA's           19     24.1      0.0
-  Total        79    100.0    100.0
+NON            10     12.5     16.7
+OUI            50     62.5     83.3
+NA's           20     25.0      0.0
+  Total        80    100.0    100.0
 ```
 
 Si oui, laquelle ?
@@ -297,17 +326,16 @@ Si oui, laquelle ?
 ```
 d$PRES_OUI[d$PRESCRIPTION == "OUI"] : 
             Frequency   %(NA+)   %(NA-)
-IMP                 8     11.6       16
-P                  17     24.6       34
-P ST                1      1.4        2
+IMP                 8     11.4       16
+P                  17     24.3       34
+P  ST               1      1.4        2
 P ST IMP AV         1      1.4        2
 P ST IMP PM         1      1.4        2
 PT                  1      1.4        2
-ST                 19     27.5       38
-ST                  1      1.4        2
+ST                 20     28.6       40
 ST IMP              1      1.4        2
-NA's               19     27.5        0
-  Total            69    100.0      100
+<NA>               20     28.6        0
+  Total            70    100.0      100
 ```
 
 14. Avez-vous eu l’impression que le professionnel de santé a influencé votre choix ?
@@ -317,10 +345,10 @@ NA's               19     27.5        0
 ```
 d$INFLUENCE : 
         Frequency   %(NA+)   %(NA-)
-NON            46     58.2       78
-OUI            13     16.5       22
-NA's           20     25.3        0
-  Total        79    100.0      100
+NON            46     57.5       78
+OUI            13     16.2       22
+NA's           21     26.2        0
+  Total        80    100.0      100
 ```
 
 Si oui, avez-vous adhéré à sa proposition ?
@@ -333,11 +361,10 @@ Le "si oui" n'a pas ttoujours été respecté. Au moins une femme dit ne pas avo
 ```
 d$ACCEPTE : 
         Frequency   %(NA+)   %(NA-)
-non             1      1.3      4.5
-NON             8     10.1     36.4
-OUI            13     16.5     59.1
-NA's           57     72.2      0.0
-  Total        79    100.0    100.0
+NON             9     11.2     40.9
+OUI            13     16.2     59.1
+NA's           58     72.5      0.0
+  Total        80    100.0    100.0
 ```
 
 ![](analyse_files/figure-html/accepte-2.png) 
@@ -345,11 +372,10 @@ NA's           57     72.2      0.0
 ```
 d$ACCEPTE[d$INFLUENCE == "OUI"] : 
         Frequency   %(NA+)   %(NA-)
-non             0      0.0      0.0
-NON             1      3.0      9.1
-OUI            10     30.3     90.9
-NA's           22     66.7      0.0
-  Total        33    100.0    100.0
+NON             1      2.9      9.1
+OUI            10     29.4     90.9
+NA's           23     67.6      0.0
+  Total        34    100.0    100.0
 ```
 
 15. Si vous n’adhérez pas à sa proposition, pourquoi ?
@@ -383,21 +409,19 @@ ToDO...
 16. À ce jour, quelle(s) méthode(s) de contraception avez-vous choisi?
 ----------------------------------------------------------------------
 
-
-```
-AUCUNE      P     SC     SH    IMP     PT     AV     PM     SP     RT 
-     1      2      2      1      1      1      1      1      1      1 
-    AB     CT   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA> 
-     1      1      1      1      1      1      1      1      1      1 
-  <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA> 
-     1      1      1      1      1      1      1      1      1      1 
-  <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA> 
-     1      1      2      1      1      1      2      1      1      1 
-  <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA> 
-     1      1      1      1      1      1      1      1      1      1 
-  <NA>   <NA>   <NA>   <NA>   <NA>   <NA>   <NA> 
-     1      1      1      1      1      1      2 
-```
-
 ![](analyse_files/figure-html/choix_final-1.png) 
 
+Evolution du choix de la méthode de contraception
+-------------------------------------------------
+
+![](analyse_files/figure-html/evol-1.png) 
+
+```
+
+	Fisher's Exact Test for Count Data
+
+data:  a
+p-value = 6.237e-11
+alternative hypothesis: two.sided
+```
+Le choix d'une méthode de contraception est fortement modifié après la consultation (différence avant/après est statistiquement significative au test exact de Fisher (version améliorée du Khi2) p < 0.001 au seuil de risque alpha de 5%). La méthode qui convinct le plus de femmes est le Stérilet. Toutes les autres méthodes sont en diminution sauf les ilplants qui progressent très modestement.

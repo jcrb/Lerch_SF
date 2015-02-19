@@ -22,5 +22,6 @@ Le texte de description du graphe se trouve dans graph1.gv. La commande system a
 # system("dot -Tdot graph1.gv -o graph1.txt") # programme en mode texte
 
 system("dot -Tpdf graph2.gv -o graph2.pdf")
+system("dot -Tpng graph2.gv -o graph2.png") # png
 ```
 

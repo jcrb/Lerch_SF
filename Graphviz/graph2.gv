@@ -1,19 +1,21 @@
 digraph G {
 	node[shape = box];
 	Q1[label = "Questionnaires distribués\n N = 400"];
-	Q2[label = "Questionnaires récupérés\n N = 159"];
-    Q3[label = "Questionnaires exploitables\n N = 135"];
-    Q4[label = "Questionnaires prof.santé\n N = 76"];
+	Q2[label = "Questionnaires récupérés\n N = 137"];
+    Q3[label = "Questionnaires exploitables\n N = 136"];
+    Q4[label = "Questionnaires prof.santé\n N = 77"];
     Q5[label = "Questionnaires patientes\n N = 59"];
 
-    Q7[label = "HTP N = "];
-    Q8[label = "CMCO N = "];
+    Q7[label = "Poly Gynéco 1\n N = 43"]; /* consultantes HTP */
+    Q8[label = "Poly Gynéco 2\n N = 16"]; /* consultantes CMCO */
 
-    Q9[label = "HTP N = "];
-    Q10[label = "CMCO N = "];
+    Q9[label = "Poly Gynéco 1\n N = 52"]; /* médecins HTP */
+    Q10[label = "Poly Gynéco 2\n N = 25"]; /* médecins CMCO */
 
     Q11[label  = "Patientes\n N = 200"]
     Q12[label  = "Prof.santé\n  N = 200"]
+
+    Q13[label  = "Questionnaire exclu\n N = 1"]
 
     /* liens */
 
@@ -30,6 +32,8 @@ digraph G {
 
     Q11 -> Q1
     Q12 -> Q1
+
+    Q13 -> Q5 [style=dotted]
 	
 	
 
