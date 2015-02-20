@@ -61,14 +61,14 @@ age
 ```
 d$NIVEAU : 
          Frequency   %(NA+)   %(NA-)
-AUTRE            1      1.2      1.7
-bac             20     25.0     34.5
-Bac +2/3        13     16.2     22.4
-Bac +5           2      2.5      3.4
-CAP/BEP         14     17.5     24.1
-COLLEGE          7      8.8     12.1
-JAMAIS           1      1.2      1.7
 NA's            22     27.5      0.0
+bac             20     25.0     34.5
+CAP/BEP         14     17.5     24.1
+Bac +2/3        13     16.2     22.4
+COLLEGE          7      8.8     12.1
+Bac +5           2      2.5      3.4
+AUTRE            1      1.2      1.7
+JAMAIS           1      1.2      1.7
   Total         80    100.0    100.0
 ```
 
@@ -326,15 +326,15 @@ Si oui, laquelle ?
 ```
 d$PRES_OUI[d$PRESCRIPTION == "OUI"] : 
             Frequency   %(NA+)   %(NA-)
-IMP                 8     11.4       16
+ST                 20     28.6       40
+<NA>               20     28.6        0
 P                  17     24.3       34
+IMP                 8     11.4       16
 P  ST               1      1.4        2
 P ST IMP AV         1      1.4        2
 P ST IMP PM         1      1.4        2
 PT                  1      1.4        2
-ST                 20     28.6       40
 ST IMP              1      1.4        2
-<NA>               20     28.6        0
   Total            70    100.0      100
 ```
 
@@ -392,11 +392,11 @@ ATTENTION:
 d$METHODE[d$ACCEPTE == "NON" & !is.na(d$ACCEPTE)] : 
              Frequency   %(NA+)   %(NA-)
 AUTRE                3     33.3     50.0
-BESOINS              0      0.0      0.0
-MODE_VIE             2     22.2     33.3
-PAS_DE_CONTR         0      0.0      0.0
-PAS_ENVIE            1     11.1     16.7
 NA's                 3     33.3      0.0
+MODE_VIE             2     22.2     33.3
+PAS_ENVIE            1     11.1     16.7
+BESOINS              0      0.0      0.0
+PAS_DE_CONTR         0      0.0      0.0
   Total              9    100.0    100.0
 ```
 

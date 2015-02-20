@@ -25,6 +25,9 @@ d <- read.csv(file, skip = 1)
 n <- nrow(d)
 library(epicalc)
 library(stringr)
+
+# pour ls coouleurs oui/non
+cadet <- c("cadetblue1", "cornflowerblue")
 ```
 Le fichier __`r file`__ contient __`r nrow(d)`__ enregistrements.
 
@@ -72,7 +75,7 @@ barplot(table(age), ylab = "Fréquence", xlab = "tranches d'âge (années)", mai
 ```{r csp, echo=FALSE, warning=FALSE, comment=""}
 summary(d$NIVEAU)
 
-tab1(d$NIVEAU, main = "Niveau d’étude", ylab = "Nombre")
+tab1(d$NIVEAU, main = "Niveau d’étude", ylab = "Nombre", las = 2, missing = FALSE, sort.group = "decreasing")
 
 ```
 
@@ -82,7 +85,7 @@ tab1(d$NIVEAU, main = "Niveau d’étude", ylab = "Nombre")
 ```{r couple, echo=FALSE, comment=""}
 summary(d$COUPLE)
 
-tab1(d$COUPLE, main = "Êtes-vous en couple ?", ylab = "Nombre")
+tab1(d$COUPLE, main = "Êtes-vous en couple ?", ylab = "Nombre", missing = FALSE, col = cadet)
 ```
 
 4. Avez-vous déjà été enceinte avant cette grossesse ?
@@ -91,7 +94,7 @@ tab1(d$COUPLE, main = "Êtes-vous en couple ?", ylab = "Nombre")
 ```{r grossesse_avant, echo=FALSE, comment=""}
 summary(d$GROS_AVANT)
 
-tab1(d$GROS_AVANT, main = "Avez-vous déjà été enceinte avant cette grossesse ?", ylab = "Nombre")
+tab1(d$GROS_AVANT, main = "Avez-vous déjà été enceinte avant cette grossesse ?", ylab = "Nombre", missing = FALSE, col = cadet)
 ```
 
 Si oui, combien de fois ?
@@ -108,7 +111,7 @@ apply(geste, 2, sum, na.rm=TRUE)
 # total par ligne
 nb.de.fois <- apply(geste, 1, sum, na.rm=TRUE)
 summary(nb.de.fois)
-tab1(nb.de.fois, ylab = "Nombre de cas", main = "Nombre de grossesse avant celle-ci")
+tab1(nb.de.fois, ylab = "Nombre de cas", main = "Nombre de grossesse avant celle-ci", missing = FALSE)
 
 ```
 
@@ -118,7 +121,7 @@ tab1(nb.de.fois, ylab = "Nombre de cas", main = "Nombre de grossesse avant celle
 ```{r enfants, echo=FALSE, comment=""}
 d$NB_ENFANTS <- as.factor(d$NB_ENFANTS)
 # summary(d$NB_ENFANTS)
-tab1(d$NB_ENFANTS, main = "Nombre d'enfants", ylab = "Fréquence")
+tab1(d$NB_ENFANTS, main = "Nombre d'enfants", ylab = "Fréquence", missing = FALSE)
 
 ```
 
@@ -127,21 +130,21 @@ tab1(d$NB_ENFANTS, main = "Nombre d'enfants", ylab = "Fréquence")
 (au moins une consultation par an) ?
 
 ```{r suivi, echo=FALSE, comment=""}
-tab1(d$SUIVI, main = "Avez-vous un suivi gynécologique régulier ?", ylab = "Fréquence")
+tab1(d$SUIVI, main = "Avez-vous un suivi gynécologique régulier ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 7. Quelle méthode a été envisagée pour l’IVG ?
 ----------------------------------------------
 
 ```{r methode, echo=FALSE, comment=""}
-tab1(d$IVG, main = "Méthode utilisée pour l'IVG", ylab = "Fréquence")
+tab1(d$IVG, main = "Méthode utilisée pour l'IVG", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 8. Dans l’année précèdent votre grossesse, avez-vous changé de méthode de contraception ?
 ------------------------------------------------------------------------------------------
 
 ```{r, echo=FALSE, comment=""}
-tab1(d$CHANGE, main = "Avez-vous changé de méthode de contraception ?", ylab = "Fréquence")
+tab1(d$CHANGE, main = "Avez-vous changé de méthode de contraception ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 9. Quelle(s) est/sont la ou les dernière(s) méthode(s) contraceptive(s) que vous avez utilisée avant cette grossesse ?
@@ -206,7 +209,7 @@ summary(d$DATE_UT)
 ```{r tolerance, echo=FALSE, comment=""}
 s_tolerance <- summary(d$TOLERANCE)
 s_tolerance
-tab1(d$TOLERANCE, main = "Cette méthode contraceptive vous convenait-t-elle ?", las = 2)
+tab1(d$TOLERANCE, main = "Cette méthode contraceptive vous convenait-t-elle ?", las = 2, missing = FALSE, col = 1:5, cex.names = 0.7)
 
 ```
 
@@ -240,7 +243,7 @@ barplot(sort(b, decreasing = TRUE), main = "Cause de survenue de la grossesse", 
 ----------------------------------------------------------------------------------------------------
 
 ```{r information, echo=FALSE, comment=""}
-tab1(d$INFORMATION, main="avez-vous été informée sur les différents moyens de contraception ?", ylab = "Fréquence")
+tab1(d$INFORMATION, main="avez-vous été informée sur les différents moyens de contraception ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 
@@ -248,7 +251,7 @@ tab1(d$INFORMATION, main="avez-vous été informée sur les différents moyens d
 -------------------------------------------------------
 
 ```{r prescription, echo=FALSE, comment=""}
-tab1(d$PRESCRIPTION, main="Vous a-t-on prescrit une méthode de contraception ?", ylab = "Fréquence")
+tab1(d$PRESCRIPTION, main="Vous a-t-on prescrit une méthode de contraception ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 Si oui, laquelle ?
@@ -256,13 +259,13 @@ Si oui, laquelle ?
 
 ```{r pres_oui,echo=FALSE, comment=""}
 d$PRES_OUI <- str_trim(d$PRES_OUI)
-tab1(d$PRES_OUI[d$PRESCRIPTION == "OUI"], main="Méthode de contraception prescrite", ylab = "Fréquence")
+tab1(d$PRES_OUI[d$PRESCRIPTION == "OUI"], main="Méthode de contraception prescrite", ylab = "Fréquence", missing = FALSE, sort.group = "decreasing")
 ```
 
 14. Avez-vous eu l’impression que le professionnel de santé a influencé votre choix ?
 
 ```{r influence, echo=FALSE, comment=""}
-tab1(d$INFLUENCE, main="le professionnel de santé a influencé votre choix ?", ylab = "Fréquence")
+tab1(d$INFLUENCE, main="le professionnel de santé a influencé votre choix ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 Si oui, avez-vous adhéré à sa proposition ?
@@ -271,10 +274,10 @@ Si oui, avez-vous adhéré à sa proposition ?
 Le "si oui" n'a pas ttoujours été respecté. Au moins une femme dit ne pas avoir été influencée mais n'accepte pas la proposition.
 
 ```{r accepte, echo=FALSE, comment=""}
-tab1(d$ACCEPTE, main=" avez-vous adhéré à sa proposition ?", ylab = "Fréquence")
+tab1(d$ACCEPTE, main=" avez-vous adhéré à sa proposition ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 
 # si on ne prend en compte que les réponses où les patientes disent avoir été influencées
-tab1(d$ACCEPTE[d$INFLUENCE == "OUI"], main="Si le professionnel vous a influencé,\navez-vous adhéré à sa proposition ?", ylab = "Fréquence")
+tab1(d$ACCEPTE[d$INFLUENCE == "OUI"], main="Si le professionnel vous a influencé,\navez-vous adhéré à sa proposition ?", ylab = "Fréquence", missing = FALSE, col = cadet)
 ```
 
 15. Si vous n’adhérez pas à sa proposition, pourquoi ?
@@ -287,7 +290,7 @@ ATTENTION:
 
 ```{r methode2, echo=FALSE, warning=FALSE, comment=""}
 d$ACCEPTE <- toupper(d$ACCEPTE)
-tab1(d$METHODE[d$ACCEPTE == "NON" & !is.na(d$ACCEPTE)], main="Si vous n’adhérez pas à sa proposition, pourquoi ?", ylab = "Fréquence")
+tab1(d$METHODE[d$ACCEPTE == "NON" & !is.na(d$ACCEPTE)], main="Si vous n’adhérez pas à sa proposition, pourquoi ?", ylab = "Fréquence", las = 2, cex.names = 0.7, missing = FALSE, sort.group = "decreasing")
 ```
 
 Le professionnel de santé :
@@ -332,8 +335,8 @@ apres <- c(22, 0, 4, 8, 3, 23, 1)
 names(avant) <- methode
 names(apres) <- methode
 a <- rbind(avant, apres)
-barplot(a, beside = TRUE, main = "Choix de la méthode contraceptive\n avant et après la consultation")
-legend("center", legend = rownames(a), pch = 15, col = c("black", "gray80"), bty="n")
+barplot(a, beside = TRUE, main = "Choix de la méthode contraceptive\n avant et après la consultation", , col = cadet)
+legend("center", legend = rownames(a), pch = 15, col = cadet, bty="n")
 
 # test exect de Fisher
 fisher.test(a)
